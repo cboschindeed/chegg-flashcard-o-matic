@@ -5,6 +5,7 @@ import Header from "./Header";
 import NotFound from "./NotFound";
 import CreateDeck from "../Home/CreateDeck";
 import DecksList from "../Home/DecksList";
+import Study from "../Study/Study.js";
 
 function Layout() {
   const [decks, setDecks] = useState([]);
@@ -42,6 +43,9 @@ function Layout() {
               <i className="bi bi-plus-lg"></i> Create Deck
             </Link>
             <DecksList decks={decks} setDecks={setDecks} />
+          </Route>
+          <Route path="/decks/:deckId/study">
+            <Study decks={decks} />
           </Route>
           <Route path="*">
             <NotFound />

@@ -39,10 +39,10 @@ function DecksList({ decks, setDecks }) {
               <p className="card-text">{deck.description}</p>
             </div>
             <div>
-              <Link to="/decks/:deckId" className="btn btn-secondary">
+              <Link to={`/decks/${deck.id}`} className="btn btn-secondary">
                 <i className="bi bi-eye-fill"></i> View
               </Link>
-              <Link to="/decks/:deckId/study" className="btn btn-primary">
+              <Link to={`/decks/${deck.id}/study`} className="btn btn-primary">
                 <i className="bi bi-book-half"></i> Study
               </Link>
               <button
