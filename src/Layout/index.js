@@ -41,7 +41,7 @@ function Layout() {
             <Link to="/decks/new" className="btn btn-secondary">
               <i className="bi bi-plus-lg"></i> Create Deck
             </Link>
-            <DecksList decks={decks} />
+            <DecksList decks={decks} setDecks={setDecks} />
           </Route>
           <Route path="*">
             <NotFound />

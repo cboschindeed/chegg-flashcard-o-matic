@@ -1,7 +1,31 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import { deleteDeck } from "../utils/api/index.js";
 
-function DecksList({ decks }) {
+function DecksList({ decks, setDecks }) {
+  const handleDeleteClick = (deckId) => {
+    const abortController = new AbortController();
+    const isConfirmed = window.confirm(
+      `Delete this deck?\n\nYou will not be able to recover it.`
+    );
+
+    if (isConfirmed) {
+      deleteDeck(deckId, abortController.signal)
+        .then(() => {
+          setDecks((prevDecks) =>
+            prevDecks.filter((deck) => deck.id !== deckId)
+          );
+        })
+        .catch((error) => {
+          error.name === "AbortError"
+            ? console.log("Request aborted.")
+            : console.error("Error deleting deck:", error);
+        });
+    }
+
+    abortController.abort();
+  }; // handleDeleteClick
+
   if (decks) {
     return (
       <>
@@ -21,9 +45,12 @@ function DecksList({ decks }) {
               <Link to="/decks/:deckId/study" className="btn btn-primary">
                 <i className="bi bi-book-half"></i> Study
               </Link>
-              <Link to="#" className="btn btn-danger">
+              <button
+                onClick={() => handleDeleteClick(deck.id)}
+                className="btn btn-danger"
+              >
                 <i className="bi bi-trash-fill"></i>
-              </Link>
+              </button>
             </div>
           </div>
         ))}
