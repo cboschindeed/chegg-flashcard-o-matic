@@ -36,7 +36,7 @@ function Layout() {
       <div className="container">
         <Switch>
           <Route path="/decks/new">
-            <CreateDeck />
+            <CreateDeck decks={decks} setDecks={setDecks} />
           </Route>
           <Route exact path="/">
             <Link to="/decks/new" className="btn btn-secondary">

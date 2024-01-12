@@ -2,8 +2,8 @@ import React from "react";
 import { Link } from "react-router-dom";
 import { findDeck } from "../utils/deck-helpers";
 
-function Breadcrumb({ deckId, decks }) {
-  const currentDeck = findDeck(decks, deckId);
+function Breadcrumb({ deckId, decks, createDeckLink = false }) {
+  const currentDeck = deckId ? findDeck(decks, deckId) : null;
   const deckName = currentDeck ? currentDeck.name : "Deck Name Unavailable";
 
   return (
@@ -20,9 +20,17 @@ function Breadcrumb({ deckId, decks }) {
               <Link to={`/decks/${deckId}`}>{deckName}</Link>
             </li>
           )}
-          <li className="breadcrumb-item active" aria-current="page">
-            Study
-          </li>
+          {createDeckLink ? (
+            <li className="breadcrumb-item">
+              <Link to={`/decks/new`}>Create Deck</Link>
+            </li>
+          ) : (
+            deckId && (
+              <li className="breadcrumb-item active" aria-current="page">
+                Study
+              </li>
+            )
+          )}
         </ol>
       </nav>
     </div>
