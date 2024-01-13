@@ -1,11 +1,13 @@
 import React, { useState, useEffect } from "react";
 import { useHistory, useParams } from "react-router-dom";
 import { readDeck, updateDeck } from "../utils/api/index.js";
+import { findDeck } from "../utils/deck-helpers/index.js";
 import Breadcrumb from "../Breadcrumb/Breadcrumb.js";
 
 function EditDeck({ decks, setDecks }) {
   const { deckId } = useParams();
   const history = useHistory();
+  const currentDeck = findDeck(decks, deckId);
 
   const [formData, setFormData] = useState({
     name: "",
@@ -75,9 +77,20 @@ function EditDeck({ decks, setDecks }) {
     history.push(`/decks/${deckId}`);
   };
 
+  const breadcrumbPaths = [
+    { link: "/", text: "Home" },
+    {
+      link: `/decks/${deckId}`,
+      text: currentDeck ? currentDeck.name : "Error loading deck name.",
+    },
+    {
+      text: "Edit Deck",
+    },
+  ];
+
   return (
     <>
-      <Breadcrumb deckId={deckId} decks={decks} />
+      <Breadcrumb paths={breadcrumbPaths} />
       <h1>Edit Deck</h1>
       <form onSubmit={handleSubmit}>
         <div className="mb-3">

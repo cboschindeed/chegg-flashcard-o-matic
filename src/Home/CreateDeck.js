@@ -54,9 +54,16 @@ function CreateDeck({ decks, setDecks }) {
     history.push("/");
   };
 
+  const breadcrumbPaths = [
+    { link: "/", text: "Home" },
+    {
+      text: "Create Deck",
+    },
+  ];
+
   return (
     <>
-      <Breadcrumb createDeckLink={true} />
+      <Breadcrumb paths={breadcrumbPaths} />
       <h1>Create Deck</h1>
       <form onSubmit={handleSubmit}>
         <div className="mb-3">

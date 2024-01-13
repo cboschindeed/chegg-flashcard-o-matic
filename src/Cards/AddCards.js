@@ -1,7 +1,8 @@
 import React, { useState } from "react";
-import { useParams, Link, useHistory } from "react-router-dom";
+import { useParams, useHistory } from "react-router-dom";
 import { readDeck, createCard } from "../utils/api/index.js";
 import { findDeck } from "../utils/deck-helpers/index.js";
+import Breadcrumb from "../Breadcrumb/Breadcrumb.js";
 
 function AddCard({ decks }) {
   const { deckId } = useParams();
@@ -54,8 +55,20 @@ function AddCard({ decks }) {
   const currentDeck = findDeck(decks, deckId);
   const deckName = currentDeck ? currentDeck.name : "Deck Name Unavailable";
 
+  const breadcrumbPaths = [
+    { link: "/", text: "Home" },
+    {
+      link: `/decks/${deckId}`,
+      text: currentDeck ? currentDeck.name : "Error loading deck name.",
+    },
+    {
+      text: "Add Card",
+    },
+  ];
+
   return (
     <>
+      <Breadcrumb paths={breadcrumbPaths} />
       <h1>{`${deckName}: Add Card`}</h1>
       <form onSubmit={handleSubmit}>
         <div className="mb-3">

@@ -1,9 +1,12 @@
 import React, { useEffect, useState } from "react";
-import { useParams, useHistory, Link } from "react-router-dom";
+import { useParams, useHistory } from "react-router-dom";
 import { readCard, updateCard } from "../utils/api/index.js";
+import { findDeck } from "../utils/deck-helpers/index.js";
+import Breadcrumb from "../Breadcrumb/Breadcrumb.js";
 
-function EditCard() {
+function EditCard({ decks }) {
   const { deckId, cardId } = useParams();
+  const currentDeck = findDeck(decks, deckId);
   const history = useHistory();
 
   const [card, setCard] = useState({});
@@ -60,10 +63,21 @@ function EditCard() {
     history.push(`/decks/${deckId}`);
   };
 
+  const breadcrumbPaths = [
+    { link: "/", text: "Home" },
+    {
+      link: `/decks/${deckId}`,
+      text: currentDeck ? currentDeck.name : "Error loading deck name.",
+    },
+    {
+      text: "Edit Card",
+    },
+  ];
+
   return (
     <>
+      <Breadcrumb paths={breadcrumbPaths} />
       <h1>Edit Card</h1>
-
       <form onSubmit={handleSubmit}>
         <div className="mb-3">
           <label htmlFor="front" className="form-label">
