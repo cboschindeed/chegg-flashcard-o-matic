@@ -56,12 +56,22 @@ function Study({ decks }) {
   }, [deckId, decks]);
 
   const currentDeck = findDeck(decks, deckId);
-  const deckName = currentDeck ? currentDeck.name : "Deck Name Unavailable";
-  console.log(cards);
+  const deckName = currentDeck ? currentDeck.name : "Deck name unavailable";
+
+  const breadcrumbPaths = [
+    { link: "/", text: "Home" },
+    {
+      link: `/decks/${deckId}`,
+      text: currentDeck ? currentDeck.name : "Error loading deck name.",
+    },
+    {
+      text: "Study",
+    },
+  ];
 
   return (
     <>
-      <Breadcrumb deckId={deckId} decks={decks} />
+      <Breadcrumb paths={breadcrumbPaths} />
       <h1>Study: {deckName}</h1>
       {cards.length <= 2 ? (
         <NotEnoughCards deckId={deckId} />

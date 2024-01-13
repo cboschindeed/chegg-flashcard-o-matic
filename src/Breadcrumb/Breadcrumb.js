@@ -1,36 +1,30 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import { findDeck } from "../utils/deck-helpers";
 
-function Breadcrumb({ deckId, decks, createDeckLink = false }) {
-  const currentDeck = deckId ? findDeck(decks, deckId) : null;
-  const deckName = currentDeck ? currentDeck.name : "Deck Name Unavailable";
-
+function Breadcrumb({ paths }) {
   return (
     <div>
       <nav aria-label="breadcrumb">
         <ol className="breadcrumb">
-          <li className="breadcrumb-item">
-            <Link to="/">
-              <i className="bi bi-house-door-fill"></i> Home
-            </Link>
-          </li>
-          {deckId && (
-            <li className="breadcrumb-item">
-              <Link to={`/decks/${deckId}`}>{deckName}</Link>
+          {paths.map((path, index) => (
+            <li
+              key={index}
+              className={`breadcrumb-item ${
+                index === paths.length - 1 ? "active" : ""
+              }`}
+            >
+              {path.link ? (
+                <Link to={path.link}>
+                  {index === 0 ? (
+                    <i className="bi bi-house-door-fill"></i>
+                  ) : null}{" "}
+                  {path.text}
+                </Link>
+              ) : (
+                <span>{path.text}</span>
+              )}
             </li>
-          )}
-          {createDeckLink ? (
-            <li className="breadcrumb-item">
-              <Link to={`/decks/new`}>Create Deck</Link>
-            </li>
-          ) : (
-            deckId && (
-              <li className="breadcrumb-item active" aria-current="page">
-                Study
-              </li>
-            )
-          )}
+          ))}
         </ol>
       </nav>
     </div>

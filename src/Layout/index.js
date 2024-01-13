@@ -6,6 +6,10 @@ import NotFound from "./NotFound";
 import CreateDeck from "../Home/CreateDeck";
 import DecksList from "../Home/DecksList";
 import Study from "../Study/Study.js";
+import DeckView from "../Decks/DeckView.js";
+import EditDeck from "../Decks/EditDeck.js";
+import AddCard from "../Cards/AddCards.js";
+import EditCard from "../Cards/EditCard.js";
 
 function Layout() {
   const [decks, setDecks] = useState([]);
@@ -38,14 +42,26 @@ function Layout() {
           <Route path="/decks/new">
             <CreateDeck decks={decks} setDecks={setDecks} />
           </Route>
+          <Route path="/decks/:deckId/study">
+            <Study decks={decks} />
+          </Route>
+          <Route path="/decks/:deckId/edit">
+            <EditDeck decks={decks} setDecks={setDecks} />
+          </Route>
+          <Route path="/decks/:deckId/cards/new">
+            <AddCard decks={decks} />
+          </Route>
+          <Route path="/decks/:deckId/cards/:cardId/edit">
+            <EditCard />
+          </Route>
+          <Route path="/decks/:deckId">
+            <DeckView decks={decks} setDecks={setDecks} />
+          </Route>
           <Route exact path="/">
             <Link to="/decks/new" className="btn btn-secondary">
               <i className="bi bi-plus-lg"></i> Create Deck
             </Link>
             <DecksList decks={decks} setDecks={setDecks} />
-          </Route>
-          <Route path="/decks/:deckId/study">
-            <Study decks={decks} />
           </Route>
           <Route path="*">
             <NotFound />

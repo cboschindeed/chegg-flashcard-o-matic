@@ -48,6 +48,12 @@
       "back": "b",
       "deckId": 1,
       "id": 7
+    },
+    {
+      "front": "New card question",
+      "back": "New card answer",
+      "deckId": 2,
+      "id": 8
     }
   ]
 }
