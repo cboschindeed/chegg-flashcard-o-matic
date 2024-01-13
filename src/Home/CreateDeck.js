@@ -42,8 +42,10 @@ function CreateDeck({ decks, setDecks }) {
       // Update the decks state with the created deck
       setDecks([...decks, createdDeck]);
 
-      // Redirect to the Deck screen for the newly created deck
-      history.push(`/decks/${newDeck.id}`);
+      // setTimeout using a timeout of 0 milliseconds to execute after the re-render
+      setTimeout(() => {
+        history.push(`/decks/${newDeck.id}`); // Redirect to the DeckView for the newly created deck
+      }, 0);
     } catch (error) {
       console.error("Error creating deck:", error);
     }

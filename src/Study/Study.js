@@ -39,6 +39,7 @@ function Study() {
       setIsFlipped(!isFlipped);
     } else {
       setIsFlipped(!isFlipped);
+      // setTimeout using a timeout of 0 milliseconds to execute after the re-render
       setTimeout(() => {
         const restartConfirmed = window.confirm(
           `Restart cards?\n\nClick "Cancel" to return to the Home page.`
