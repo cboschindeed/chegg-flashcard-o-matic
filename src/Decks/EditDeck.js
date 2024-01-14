@@ -1,14 +1,13 @@
 import React, { useState, useEffect } from "react";
 import { useHistory, useParams } from "react-router-dom";
 import { readDeck, updateDeck } from "../utils/api/index.js";
-import { findDeck } from "../utils/deck-helpers/index.js";
 import Breadcrumb from "../Breadcrumb/Breadcrumb.js";
 import DeckForm from "./DeckForm.js";
 
-function EditDeck({ decks, setDecks }) {
+function EditDeck() {
   const { deckId } = useParams();
   const history = useHistory();
-  const currentDeck = findDeck(decks, deckId);
+  const currentDeck = readDeck(deckId);
 
   const [formData, setFormData] = useState({
     name: "",
@@ -60,11 +59,11 @@ function EditDeck({ decks, setDecks }) {
       await updateDeck(updatedDeck);
 
       // Update the decks state with the updated deck
-      setDecks((prevDecks) =>
-        prevDecks.map((deck) =>
-          deck.id === deckId ? { ...deck, ...updatedDeck } : deck
-        )
-      );
+      //   setDecks((prevDecks) =>
+      //     prevDecks.map((deck) =>
+      //       deck.id === deckId ? { ...deck, ...updatedDeck } : deck
+      //     )
+      //   );
 
       // setTimeout using a timeout of 0 milliseconds to execute after the re-render
       setTimeout(() => {

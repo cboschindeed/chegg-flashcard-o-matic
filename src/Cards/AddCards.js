@@ -1,11 +1,10 @@
 import React, { useState } from "react";
 import { useParams, useHistory } from "react-router-dom";
-import { readDeck, createCard } from "../utils/api/index.js";
-import { findDeck } from "../utils/deck-helpers/index.js";
+import { createCard, readDeck } from "../utils/api/index.js";
 import Breadcrumb from "../Breadcrumb/Breadcrumb.js";
 import CardForm from "./CardForm.js";
 
-function AddCard({ decks }) {
+function AddCard() {
   const { deckId } = useParams();
   const [formData, setFormData] = useState({
     front: "",
@@ -25,9 +24,6 @@ function AddCard({ decks }) {
     event.preventDefault();
 
     try {
-      // Load the current deck
-      const currentDeck = await readDeck(deckId);
-
       // Create a new card
       const newCard = {
         front: formData.front,
@@ -53,7 +49,7 @@ function AddCard({ decks }) {
     history.push(`/decks/${deckId}`);
   };
 
-  const currentDeck = findDeck(decks, deckId);
+  const currentDeck = readDeck(deckId);
   const deckName = currentDeck ? currentDeck.name : "Deck Name Unavailable";
 
   const breadcrumbPaths = [

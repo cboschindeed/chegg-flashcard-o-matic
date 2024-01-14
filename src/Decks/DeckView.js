@@ -4,7 +4,7 @@ import { readDeck, deleteDeck } from "../utils/api";
 import Breadcrumb from "../Breadcrumb/Breadcrumb";
 import Flashcard from "../Cards/Flashcard";
 
-function Deck({ decks, setDecks }) {
+function Deck({ setDecks }) {
   const { deckId } = useParams();
   const [currentDeck, setCurrentDeck] = useState(null);
   const { url } = useRouteMatch();

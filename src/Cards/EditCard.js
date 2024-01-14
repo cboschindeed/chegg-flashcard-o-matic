@@ -1,13 +1,12 @@
 import React, { useEffect, useState } from "react";
 import { useParams, useHistory } from "react-router-dom";
-import { readCard, updateCard } from "../utils/api/index.js";
-import { findDeck } from "../utils/deck-helpers/index.js";
+import { readCard, readDeck, updateCard } from "../utils/api/index.js";
 import Breadcrumb from "../Breadcrumb/Breadcrumb.js";
 import CardForm from "./CardForm.js";
 
-function EditCard({ decks }) {
+function EditCard() {
   const { deckId, cardId } = useParams();
-  const currentDeck = findDeck(decks, deckId);
+  const currentDeck = readDeck(deckId);
   const history = useHistory();
 
   const [card, setCard] = useState({});
@@ -33,7 +32,7 @@ function EditCard({ decks }) {
     };
 
     loadCardAndDeck();
-  }, [deckId]);
+  }, [deckId, cardId]);
 
   const handleChange = (event) => {
     const { name, value } = event.target;

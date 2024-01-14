@@ -46,16 +46,16 @@ function Layout() {
             <Study />
           </Route>
           <Route path="/decks/:deckId/edit">
-            <EditDeck decks={decks} setDecks={setDecks} />
+            <EditDeck />
           </Route>
           <Route path="/decks/:deckId/cards/new">
             <AddCard decks={decks} />
           </Route>
           <Route path="/decks/:deckId/cards/:cardId/edit">
-            <EditCard decks={decks} />
+            <EditCard />
           </Route>
           <Route path="/decks/:deckId">
-            <DeckView decks={decks} setDecks={setDecks} />
+            <DeckView setDecks={setDecks} />
           </Route>
           <Route exact path="/">
             <Link to="/decks/new" className="btn btn-secondary mb-3">
