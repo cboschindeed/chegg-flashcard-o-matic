@@ -65,7 +65,7 @@ function CreateDeck({ decks, setDecks }) {
   ];
 
   return (
-    <>
+    <div>
       <Breadcrumb paths={breadcrumbPaths} />
       <h1>Create Deck</h1>
       <DeckForm
@@ -75,7 +75,7 @@ function CreateDeck({ decks, setDecks }) {
         handleCancel={handleCancel}
         buttonText="Submit"
       />
-    </>
+    </div>
   );
 }
 

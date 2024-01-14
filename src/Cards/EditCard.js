@@ -75,7 +75,7 @@ function EditCard() {
   ];
 
   return (
-    <>
+    <div>
       <Breadcrumb paths={breadcrumbPaths} />
       <h1>Edit Card</h1>
       <CardForm
@@ -86,7 +86,7 @@ function EditCard() {
         buttonDismissText="Cancel"
         buttonConfirmText="Submit"
       />
-    </>
+    </div>
   );
 }
 

@@ -84,7 +84,7 @@ function EditDeck() {
   ];
 
   return (
-    <>
+    <div>
       <Breadcrumb paths={breadcrumbPaths} />
       <h1>Edit Deck</h1>
       <DeckForm
@@ -94,7 +94,7 @@ function EditDeck() {
         handleCancel={handleCancel}
         buttonText="Submit"
       />
-    </>
+    </div>
   );
 }
 

@@ -74,7 +74,7 @@ function AddCard() {
   ];
 
   return (
-    <>
+    <div>
       <Breadcrumb paths={breadcrumbPaths} />
       <h1>{`${currentDeck.name}: Add Card`}</h1>
       <CardForm
@@ -85,7 +85,7 @@ function AddCard() {
         buttonDismissText="Done"
         buttonConfirmText="Save"
       />
-    </>
+    </div>
   );
 }
 

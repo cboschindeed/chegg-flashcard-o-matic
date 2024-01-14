@@ -28,7 +28,7 @@ function DecksList({ decks, setDecks }) {
 
   if (decks) {
     return (
-      <>
+      <div>
         {decks.map((deck) => (
           <div className="card deck mb-3" key={deck.id}>
             <div className="card-body">
@@ -57,7 +57,7 @@ function DecksList({ decks, setDecks }) {
             </div>
           </div>
         ))}
-      </>
+      </div>
     );
   } // if
 
