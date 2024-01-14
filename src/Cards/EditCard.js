@@ -33,7 +33,7 @@ function EditCard({ decks }) {
     };
 
     loadCardAndDeck();
-  }, [deckId, cardId]);
+  }, [deckId]);
 
   const handleChange = (event) => {
     const { name, value } = event.target;
@@ -84,7 +84,8 @@ function EditCard({ decks }) {
         handleChange={handleChange}
         handleSubmit={handleSubmit}
         handleCancel={handleCancel}
-        buttonText="Submit"
+        buttonDismissText="Cancel"
+        buttonConfirmText="Submit"
       />
     </>
   );

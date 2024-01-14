@@ -76,7 +76,8 @@ function AddCard({ decks }) {
         handleChange={handleChange}
         handleSubmit={handleSubmit}
         handleCancel={handleDone}
-        buttonText="Save"
+        buttonDismissText="Done"
+        buttonConfirmText="Save"
       />
     </>
   );

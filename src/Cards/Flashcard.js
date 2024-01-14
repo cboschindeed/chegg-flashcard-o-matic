@@ -5,8 +5,8 @@ function Flashcard({ card, url }) {
   return (
     <div className="card mb-3">
       <div className="card-body">
-        <h5 className="card-title">Question: {card.front}</h5>
-        <p className="card-text">Answer: {card.back}</p>
+        <h5 className="card-title">{card.front}</h5>
+        <p className="card-text">{card.back}</p>
         <Link
           to={`${url}/cards/${card.id}/edit`}
           className="btn btn-secondary mr-2"

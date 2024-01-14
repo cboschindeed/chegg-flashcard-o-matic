@@ -5,7 +5,8 @@ function CardForm({
   handleChange,
   handleSubmit,
   handleCancel,
-  buttonText,
+  buttonDismissText,
+  buttonConfirmText,
 }) {
   return (
     <form onSubmit={handleSubmit}>
@@ -15,6 +16,7 @@ function CardForm({
         </label>
         <textarea
           className="form-control"
+          placeholder="Front side of card"
           id="front"
           name="front"
           value={formData.front}
@@ -29,6 +31,7 @@ function CardForm({
         </label>
         <textarea
           className="form-control"
+          placeholder="Back side of card"
           id="back"
           name="back"
           value={formData.back}
@@ -42,10 +45,10 @@ function CardForm({
         className="btn btn-secondary mr-2"
         onClick={handleCancel}
       >
-        Cancel
+        {buttonDismissText}
       </button>
       <button type="submit" className="btn btn-primary">
-        {buttonText}
+        {buttonConfirmText}
       </button>
     </form>
   );
