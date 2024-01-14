@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useParams, Link, useRouteMatch, useHistory } from "react-router-dom";
 import { readDeck, deleteDeck } from "../utils/api";
 import Breadcrumb from "../Breadcrumb/Breadcrumb";
+import Flashcard from "../Cards/Flashcard";
 
 function Deck({ decks, setDecks }) {
   const { deckId } = useParams();
@@ -31,18 +32,10 @@ function Deck({ decks, setDecks }) {
       // Call your deleteDeck function here and update the state
       deleteDeck(deckId);
       // Update the decks state (setDecks) by removing the deleted deck
-      setDecks((prevDecks) =>
-        // prevDecks.filter((deck) => deck.id !== parseInt(deckId))
-        prevDecks.filter((deck) => deck.id !== deckId)
-      );
+      setDecks((prevDecks) => prevDecks.filter((deck) => deck.id !== deckId));
       history.push("/");
     }
   };
-
-  if (currentDeck === null) {
-    // If currentDeck is still null, render a loading state or handle it appropriately
-    return <p>Loading...</p>;
-  }
 
   const breadcrumbPaths = [
     { link: "/", text: "Home" },
@@ -52,7 +45,7 @@ function Deck({ decks, setDecks }) {
     },
   ];
 
-  return (
+  return currentDeck ? (
     <div>
       <Breadcrumb paths={breadcrumbPaths} />
       <h1>{currentDeck.name}</h1>
@@ -73,27 +66,15 @@ function Deck({ decks, setDecks }) {
         </button>
       </div>
 
-      <h2>Cards</h2>
-      <div className="card-deck">
+      <h2>Flashcards</h2>
+      <div>
         {currentDeck.cards.map((card) => (
-          <div key={card.id} className="card">
-            <div className="card-body">
-              <h5 className="card-title">Question: {card.front}</h5>
-              <p className="card-text">Answer: {card.back}</p>
-              <Link
-                to={`${url}/cards/${card.id}/edit`}
-                className="btn btn-secondary mr-2"
-              >
-                <i className="bi bi-pencil-fill"></i> Edit
-              </Link>
-              <button className="btn btn-danger">
-                <i className="bi bi-trash-fill"></i>
-              </button>
-            </div>
-          </div>
+          <Flashcard key={card.id} card={card} url={url} />
         ))}
       </div>
     </div>
+  ) : (
+    <h1>Loading...</h1>
   );
 }
 

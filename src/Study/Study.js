@@ -86,7 +86,7 @@ function Study() {
           <h5 className="card-title">
             {isFlipped
               ? "Answer"
-              : `Question (${cardIndex + 1} of ${deck.cards.length})`}
+              : `Question (Card ${cardIndex + 1} of ${deck.cards.length})`}
           </h5>
           <p className="card-text">
             {isFlipped ? currentCard.back : currentCard.front}

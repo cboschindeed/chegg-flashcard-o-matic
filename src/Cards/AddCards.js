@@ -3,6 +3,7 @@ import { useParams, useHistory } from "react-router-dom";
 import { readDeck, createCard } from "../utils/api/index.js";
 import { findDeck } from "../utils/deck-helpers/index.js";
 import Breadcrumb from "../Breadcrumb/Breadcrumb.js";
+import CardForm from "./CardForm.js";
 
 function AddCard({ decks }) {
   const { deckId } = useParams();
@@ -70,48 +71,13 @@ function AddCard({ decks }) {
     <>
       <Breadcrumb paths={breadcrumbPaths} />
       <h1>{`${deckName}: Add Card`}</h1>
-      <form onSubmit={handleSubmit}>
-        <div className="mb-3">
-          <label htmlFor="front" className="form-label">
-            Front
-          </label>
-          <textarea
-            className="form-control"
-            placeholder="Front side of card"
-            id="front"
-            name="front"
-            value={formData.front}
-            onChange={handleChange}
-            rows="4"
-            required
-          ></textarea>
-        </div>
-        <div className="mb-3">
-          <label htmlFor="back" className="form-label">
-            Back
-          </label>
-          <textarea
-            className="form-control"
-            placeholder="Back side of card"
-            id="back"
-            name="back"
-            value={formData.back}
-            onChange={handleChange}
-            rows="4"
-            required
-          ></textarea>
-        </div>
-        <button
-          type="button"
-          className="btn btn-secondary mr-2"
-          onClick={handleDone}
-        >
-          Done
-        </button>
-        <button type="submit" className="btn btn-primary">
-          Save
-        </button>
-      </form>
+      <CardForm
+        formData={formData}
+        handleChange={handleChange}
+        handleSubmit={handleSubmit}
+        handleCancel={handleDone}
+        buttonText="Save"
+      />
     </>
   );
 }

@@ -3,6 +3,7 @@ import { useHistory, useParams } from "react-router-dom";
 import { readDeck, updateDeck } from "../utils/api/index.js";
 import { findDeck } from "../utils/deck-helpers/index.js";
 import Breadcrumb from "../Breadcrumb/Breadcrumb.js";
+import DeckForm from "./DeckForm.js";
 
 function EditDeck({ decks, setDecks }) {
   const { deckId } = useParams();
@@ -65,8 +66,10 @@ function EditDeck({ decks, setDecks }) {
         )
       );
 
-      // Redirect to the Deck screen for the updated deck
-      history.push(`/decks/${deckId}`);
+      // setTimeout using a timeout of 0 milliseconds to execute after the re-render
+      setTimeout(() => {
+        history.push(`/decks/${deckId}`); // Redirect to the DeckView for the newly created deck
+      }, 0);
     } catch (error) {
       console.error("Error updating deck:", error);
     }
@@ -92,52 +95,13 @@ function EditDeck({ decks, setDecks }) {
     <>
       <Breadcrumb paths={breadcrumbPaths} />
       <h1>Edit Deck</h1>
-      <form onSubmit={handleSubmit}>
-        <div className="mb-3">
-          <label htmlFor="name" className="form-label">
-            Name
-          </label>
-          <input
-            type="text"
-            placeholder="Deck name"
-            className="form-control"
-            id="name"
-            name="name"
-            value={formData.name}
-            onChange={handleChange}
-            required
-          />
-        </div>
-        <div className="mb-3">
-          <label htmlFor="description" className="form-label">
-            Description
-          </label>
-          <textarea
-            placeholder="Brief description of the deck"
-            className="form-control"
-            id="description"
-            name="description"
-            value={formData.description}
-            onChange={handleChange}
-            rows="4"
-            required
-          ></textarea>
-        </div>
-        <button
-          type="button"
-          className="btn btn-secondary mr-2"
-          onClick={handleCancel}
-        >
-          Cancel
-        </button>
-        <button
-          type="submit"
-          className="btn btn-primary"
-          onClick={handleSubmit}
-        >
-          Submit
-        </button>
-      </form>
+      <DeckForm
+        formData={formData}
+        handleChange={handleChange}
+        handleSubmit={handleSubmit}
+        handleCancel={handleCancel}
+        buttonText="Submit"
+      />
     </>
   );
 }

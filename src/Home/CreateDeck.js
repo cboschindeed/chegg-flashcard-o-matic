@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { useHistory } from "react-router-dom";
 import { createDeck } from "../utils/api/index.js";
 import Breadcrumb from "../Breadcrumb/Breadcrumb.js";
+import DeckForm from "../Decks/DeckForm.js";
 
 function CreateDeck({ decks, setDecks }) {
   const [formData, setFormData] = useState({
@@ -67,52 +68,13 @@ function CreateDeck({ decks, setDecks }) {
     <>
       <Breadcrumb paths={breadcrumbPaths} />
       <h1>Create Deck</h1>
-      <form onSubmit={handleSubmit}>
-        <div className="mb-3">
-          <label htmlFor="name" className="form-label">
-            Name
-          </label>
-          <input
-            type="text"
-            placeholder="Deck name"
-            className="form-control"
-            id="name"
-            name="name"
-            value={formData.name}
-            onChange={handleChange}
-            required
-          />
-        </div>
-        <div className="mb-3">
-          <label htmlFor="description" className="form-label">
-            Description
-          </label>
-          <textarea
-            placeholder="Brief description of the deck"
-            className="form-control"
-            id="description"
-            name="description"
-            value={formData.description}
-            onChange={handleChange}
-            rows="4"
-            required
-          ></textarea>
-        </div>
-        <button
-          type="button"
-          className="btn btn-secondary mr-2"
-          onClick={handleCancel}
-        >
-          Cancel
-        </button>
-        <button
-          type="submit"
-          className="btn btn-primary"
-          onClick={handleSubmit}
-        >
-          Submit
-        </button>
-      </form>
+      <DeckForm
+        formData={formData}
+        handleChange={handleChange}
+        handleSubmit={handleSubmit}
+        handleCancel={handleCancel}
+        buttonText="Submit"
+      />
     </>
   );
 }
