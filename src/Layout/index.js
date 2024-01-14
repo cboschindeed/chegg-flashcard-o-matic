@@ -58,7 +58,7 @@ function Layout() {
             <DeckView decks={decks} setDecks={setDecks} />
           </Route>
           <Route exact path="/">
-            <Link to="/decks/new" className="btn btn-secondary">
+            <Link to="/decks/new" className="btn btn-secondary mb-3">
               <i className="bi bi-plus-lg"></i> Create Deck
             </Link>
             <DecksList decks={decks} setDecks={setDecks} />
