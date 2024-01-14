@@ -7,12 +7,11 @@ import DeckForm from "./DeckForm.js";
 function EditDeck() {
   const { deckId } = useParams();
   const history = useHistory();
-  const currentDeck = readDeck(deckId);
-
   const [formData, setFormData] = useState({
     name: "",
     description: "",
   });
+  const [currentDeck, setCurrentDeck] = useState({});
 
   useEffect(() => {
     const loadDeck = async () => {
@@ -22,6 +21,7 @@ function EditDeck() {
           name: loadedDeck.name,
           description: loadedDeck.description,
         });
+        setCurrentDeck(loadedDeck);
       } catch (error) {
         console.error("Error loading deck:", error);
       }
@@ -57,13 +57,6 @@ function EditDeck() {
     try {
       // Call the updateDeck function to save the updated deck to the API
       await updateDeck(updatedDeck);
-
-      // Update the decks state with the updated deck
-      //   setDecks((prevDecks) =>
-      //     prevDecks.map((deck) =>
-      //       deck.id === deckId ? { ...deck, ...updatedDeck } : deck
-      //     )
-      //   );
 
       // setTimeout using a timeout of 0 milliseconds to execute after the re-render
       setTimeout(() => {

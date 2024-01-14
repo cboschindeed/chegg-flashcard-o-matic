@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useParams, useHistory } from "react-router-dom";
 import { createCard, readDeck } from "../utils/api/index.js";
 import Breadcrumb from "../Breadcrumb/Breadcrumb.js";
@@ -10,7 +10,20 @@ function AddCard() {
     front: "",
     back: "",
   });
+  const [currentDeck, setCurrentDeck] = useState({});
   const history = useHistory();
+
+  useEffect(() => {
+    const getCurrentDeck = async () => {
+      try {
+        setCurrentDeck(await readDeck(deckId));
+      } catch (error) {
+        console.error("Error loading deck:", error);
+      }
+    };
+
+    getCurrentDeck();
+  }, [deckId]);
 
   const handleChange = (event) => {
     const { name, value } = event.target;
@@ -49,9 +62,6 @@ function AddCard() {
     history.push(`/decks/${deckId}`);
   };
 
-  const currentDeck = readDeck(deckId);
-  const deckName = currentDeck ? currentDeck.name : "Deck Name Unavailable";
-
   const breadcrumbPaths = [
     { link: "/", text: "Home" },
     {
@@ -66,7 +76,7 @@ function AddCard() {
   return (
     <>
       <Breadcrumb paths={breadcrumbPaths} />
-      <h1>{`${deckName}: Add Card`}</h1>
+      <h1>{`${currentDeck.name}: Add Card`}</h1>
       <CardForm
         formData={formData}
         handleChange={handleChange}

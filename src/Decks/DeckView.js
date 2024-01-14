@@ -11,17 +11,15 @@ function Deck({ setDecks }) {
   const history = useHistory();
 
   useEffect(() => {
-    const loadDeck = async () => {
+    const getCurrentDeck = async () => {
       try {
-        const loadedDeck = await readDeck(deckId);
-        console.log(loadedDeck);
-        setCurrentDeck(loadedDeck);
+        setCurrentDeck(await readDeck(deckId));
       } catch (error) {
         console.error("Error loading deck:", error);
       }
     };
 
-    loadDeck();
+    getCurrentDeck();
   }, [deckId]);
 
   const handleDeleteDeck = () => {

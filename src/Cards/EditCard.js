@@ -6,14 +6,13 @@ import CardForm from "./CardForm.js";
 
 function EditCard() {
   const { deckId, cardId } = useParams();
-  const currentDeck = readDeck(deckId);
   const history = useHistory();
-
   const [card, setCard] = useState({});
   const [formData, setFormData] = useState({
     front: "",
     back: "",
   });
+  const [currentDeck, setCurrentDeck] = useState({});
 
   useEffect(() => {
     const loadCardAndDeck = async () => {
@@ -26,6 +25,7 @@ function EditCard() {
           front: loadedCard.front,
           back: loadedCard.back,
         });
+        setCurrentDeck(await readDeck(deckId));
       } catch (error) {
         console.error("Error loading card and deck:", error);
       }
